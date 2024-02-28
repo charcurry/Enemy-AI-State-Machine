@@ -9,12 +9,19 @@ public class EnemyStateMachine : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
     public Vector3 target;
+    public FPS_Controller player;
 
     #region Patrol Variables
 
     [SerializeField] private GameObject[] waypoints;
 
     public int waypointIndex = 0;
+
+    #endregion
+
+    #region Chase Variables
+
+    public int chaseDistance;
 
     #endregion
 
@@ -32,6 +39,7 @@ public class EnemyStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GetComponent<FPS_Controller>();
         InitWaypoints();
         navMeshAgent = GetComponent<NavMeshAgent>();
         enemyState = EnemyStates.patrol;
@@ -52,10 +60,16 @@ public class EnemyStateMachine : MonoBehaviour
                     //Debug.Log("Reached Waypoint!");
                     UpdateWaypoint();
                 }
+
+                if (Vector3.Distance(transform.position, player.transform.position) < chaseDistance)
+                {
+                    enemyState = EnemyStates.chase;
+                }
+
                     break; 
             case EnemyStates.chase:
-                //
-                //
+                target = player.transform.position;
+                navMeshAgent.SetDestination(target);
                 break;
             case EnemyStates.search:
                 //

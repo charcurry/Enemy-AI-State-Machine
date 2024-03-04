@@ -681,6 +681,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
+  patrol: {fileID: 2100000, guid: 08c941345ceeb5b4991f6bb24ada1712, type: 2}
+  chase: {fileID: 2100000, guid: 170157362b5fcd643b45ec403045b6d3, type: 2}
+  search: {fileID: 2100000, guid: d6260031ff6518149ad01260f9780162, type: 2}
+  attack: {fileID: 2100000, guid: 4b6fd1f215ed6f74d9e438a495f2e820, type: 2}
+  retreat: {fileID: 2100000, guid: 3fda7dbb02eda5740b3bcedb915dbd08, type: 2}
   waypoints: []
   waypointIndex: 0
   chaseDistance: 5

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,13 @@ public class EnemyStateMachine : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
     public Vector3 target;
-    public FPS_Controller player;
+    private FPS_Controller player;
+
+    public Material patrol;
+    public Material chase;
+    public Material search;
+    public Material attack;
+    public Material retreat;
 
     #region Patrol Variables
 
@@ -39,7 +46,7 @@ public class EnemyStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponent<FPS_Controller>();
+        player = FindObjectOfType<FPS_Controller>();
         InitWaypoints();
         navMeshAgent = GetComponent<NavMeshAgent>();
         enemyState = EnemyStates.patrol;
@@ -53,6 +60,7 @@ public class EnemyStateMachine : MonoBehaviour
         switch (enemyState)
         {
             case EnemyStates.patrol:
+                GetComponent<Renderer>().material = patrol;
                 target = waypoints[waypointIndex].transform.position;
                 navMeshAgent.SetDestination(target);
                 if (Vector3.Distance(transform.position, target) < 1)
@@ -68,18 +76,22 @@ public class EnemyStateMachine : MonoBehaviour
 
                     break; 
             case EnemyStates.chase:
+                GetComponent<Renderer>().material = chase;
                 target = player.transform.position;
                 navMeshAgent.SetDestination(target);
                 break;
             case EnemyStates.search:
+                GetComponent<Renderer>().material = search;
                 //
                 //
                 break;
             case EnemyStates.attack:
+                GetComponent<Renderer>().material = attack;
                 //
                 //
                 break;
             case EnemyStates.retreat:
+                GetComponent<Renderer>().material = retreat;
                 //
                 //
                 break;

@@ -18,7 +18,7 @@ public class FPS_Controller : MonoBehaviour
 
     [Header("Jump Settings")]
     [SerializeField] private float distance = 1.0f;
-    [SerializeField] private float jumpForce = 10f;
+    //[SerializeField] private float jumpForce = 10f;
     [SerializeField] private float gravity = -9.81f;
 
     private float verticalRotation;
@@ -97,10 +97,10 @@ public class FPS_Controller : MonoBehaviour
         currentMovement.x = horizontalMovement.x * speed;
         currentMovement.z = horizontalMovement.z * speed;
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
-        }
+        //if (Input.GetButtonDown("Jump") && isGrounded)
+        //{
+        //    velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+        //}
 
         if (velocity.y < 0f && isGrounded)
         {

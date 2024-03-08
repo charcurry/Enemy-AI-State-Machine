@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,6 +13,7 @@ public class EnemyStateMachine : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     public Vector3 target;
     private FPS_Controller player;
+    public TextMeshProUGUI currentStateText;
 
     // The rule of thumb im using for the variables is that for the most part, they are self contained, but
     // variables such as chaseDistance will be used in other States as if the enemy is in the retreat state
@@ -81,6 +83,8 @@ public class EnemyStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentStateText.text = "Current State: " + enemyState.ToString();
+
         switch (enemyState)
         {
             case EnemyStates.patrol:
@@ -164,7 +168,7 @@ public class EnemyStateMachine : MonoBehaviour
     }
 
     // These are the only two States that really needed external methods to make everything look cleaner.
-    // They are only used in the specified State. 
+    // They are only used in/pertain to the specified State. 
     #region Patrol Methods
 
     public void UpdateWaypoint()
